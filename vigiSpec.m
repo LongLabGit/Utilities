@@ -1,4 +1,4 @@
-function vigiSpec(varargin)
+function [T,F,S]=vigiSpec(varargin)
 %input (in that order!)
 %   w: signal, 1 x time
 %   fs: sample freq (hz)
