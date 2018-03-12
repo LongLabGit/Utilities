@@ -1,12 +1,14 @@
 reboot;
 addpath S:\Vigi\Matlab\GitHub\Clustering\IO 
-maxPiece=8*60;%analyze X seconds at a time. here 10 minutes. use for RAM control, increase for minor time speedups
-fOrig='S:\Vigi\Datasets\CorticalSpikes\Data\Monkey\Intan\jointClean\amplifier.dat';
-fNew='S:\Vigi\Datasets\CorticalSpikes\Data\Monkey\Intan\jointClean\amplifier.fil';
+maxPiece=10*60;%analyze X seconds at a time. here 10 minutes. use for RAM control, increase for minor time speedups and avoiding edge effects
+F='S:\Vigi\Datasets\CorticalSpikes\Data\Monkey2\ECoG1#4_2018-02-23_18-41-58_briefsf11\intanClean\';
+fOrig=[F,'amplifier.dat'];
+fNew=[F,'amplifier.fil'];
 fs=3e4;nAmp=64;
 %%
 fileinfo = dir(fOrig);
 total_seconds = fileinfo.bytes/(nAmp * 2)/fs;
+%250 to 3000 is really good for MUA
 bpFilt = designfilt('bandpassfir','FilterOrder',1000,'SampleRate',fs,...
     'CutoffFrequency1',250,'CutoffFrequency2',3000);
 fid = fopen(fNew, 'w');
